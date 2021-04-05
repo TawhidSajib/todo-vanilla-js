@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>todo</title>
+    <meta charset="windows-1252">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        li {
+            cursor: pointer;
+            list-style-type: none;
+            padding: 10px;
+        }
+
+
+        h4 {
+            padding-left: 23px;
+        }
+
+        ul li span.checked {
+            background: #888;
+            color: #fff;
+            text-decoration: line-through;
+            padding: 10px;
+        }
+
+        .header {
+            background-color: orangered;
+            padding: 30px 40px;
+            color: white;
+            text-align: center;
+        }
+
+
+        .close {
+
+            padding: 12px 16px 12px 16px;
+        }
+
+        .close:hover {
+            background-color: #f44336;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="myDiv" class="header">
+        <h2>Todo List</h2>
+        <input type="text" id="txt">
+        <button onclick="add()">Add</button>
+        <button onclick="edit()">Edit</button>
+    </div>
+
+
+    <h4>Task:</h4>
+    <ul id="list">
+
+        <li>
+
+            <span>Html</span>
+        </li>
+        <li>
+            <span class="checked">CSS</span>
+        </li>
+        <li>
+
+            <span>Javascript</span>
+        </li>
+    </ul>
+
+    <script>
+        var liNode = document.getElementsByTagName("LI");   
+        var i;
+        for (i = 0; i < liNode.length; i++) {
+            var deleteBtn = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            deleteBtn.className = "close";
+            deleteBtn.appendChild(txt)
+            liNode[i].appendChild(deleteBtn);
+        }
+          
+
+        var close = document.getElementsByClassName("close");
+        var i;
+        for (i = 0; i < close.length; i++) {
+            close[i].onclick = function () {
+                var li = this.parentElement;
+                li.style.display = "none";
+                inputText.value = ''
+            }
+        }
+
+        var inputText = document.getElementById("txt"),
+            items = document.querySelectorAll("#list li"),
+            todos = [],index;
+
+        for (var i = 0; i < items.length; i++) {
+            todos.push();
+        }
+
+        for (var i = 0; i < items.length; i++) {
+            items[i].onclick = function () {
+                index = todos.indexOf(this.innerText);
+                inputText.value = this.innerText;
+        
+            };
+
+        }
+
+        var list = document.querySelector('ul');
+        list.addEventListener('click', function (ev) {
+            if (ev.target.tagName === 'SPAN') {
+                ev.target.classList.toggle('checked');
+            }
+        }, false)
+
+        function refreshArray() {
+            todos.length = 0;
+            items = document.querySelectorAll("#list li");
+            for (var i = 0; i < items.length; i++) {
+                todos.push(items[i].innerText);
+
+            }
+        }
+
+        function add() {
+            if (inputText.value === '') {
+                alert('empty')
+            } else {
+                var listNode = document.getElementById("list"),
+                    textNode = document.createTextNode(inputText.value),
+                    liNode = document.createElement("LI");
+
+                var deleteBtn = document.createElement("SPAN");
+                var txt = document.createTextNode("\u00D7");
+                deleteBtn.className = "close";
+                deleteBtn.addEventListener('click',deleteItem)
+
+
+                for (i = 0; i < close.length; i++) {
+                    close[i].onclick = function () {
+                        var div = this.parentElement;
+                        div.style.display = "none";
+                    }
+                }
+
+                liNode.appendChild(textNode);
+                listNode.appendChild(liNode);
+                deleteBtn.appendChild(txt);
+                liNode.appendChild(deleteBtn)
+
+                refreshArray();
+                liNode.onclick = function () {
+                    index = todos.indexOf(liNode.innerText);
+                    inputText.value = liNode.innerText;
+
+                };
+            }
+        }
+
+        function edit() {
+            items[index].innerText = inputText.value;
+            inputText.value = ''
+            refreshArray();
+              
+        }
+
+        function deleteItem() {
+            refreshArray();
+            if (items.length > 0) {
+                items[index].parentNode.removeChild(items[index]);
+                inputText.value = "";
+            }
+           
+        }
+    </script>
+
+</body>
+
+</html>
