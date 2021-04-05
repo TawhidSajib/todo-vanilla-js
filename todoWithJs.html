@@ -68,9 +68,10 @@
 
         for (var i = 0; i < items.length; i++) {
             items[i].onclick = function () {
+
                 index = todos.indexOf(this.innerText);
                 inputText.value = this.innerText;
-
+                console.log(4777474)
             };
 
         }
@@ -94,10 +95,9 @@
 
         function refreshArray() {
             todos.length = 0;
-            items = document.querySelectorAll("#list li");
+            items = document.querySelectorAll("#list span");
             for (var i = 0; i < items.length; i++) {
                 todos.push(items[i].innerText);
-
             }
         }
 
@@ -108,9 +108,10 @@
                 var listNode = document.getElementById("list"),
                     textNode = document.createTextNode(inputText.value),
                     liNode = document.createElement("LI");
-                    span = document.createElement('SPAN')
+                span = document.createElement('SPAN')
+                span.className = "task"
 
-                var spanDelete = document.createElement("SPAN");
+                var spanDelete = document.createElement("span");
                 var txt = document.createTextNode("\u00D7");
                 spanDelete.className = "close";
 
@@ -119,7 +120,7 @@
                 liNode.appendChild(span)
                 span.appendChild(textNode)
                 liNode.appendChild(spanDelete)
-
+               
                 var close = document.getElementsByClassName("close");
                 for (i = 0; i < close.length; i++) {
                     close[i].onclick = function () {
@@ -130,20 +131,22 @@
 
                 inputText.value = ''
                 refreshArray();
-                liNode.onclick = function () {
-                    index = todos.indexOf(liNode.innerText);
-                    inputText.value = liNode.innerText;
-                    
+                var task = document.querySelectorAll('.task');
+                for (var y = 0; y < task.length; y++) {
+                    task[y].onclick = function (e) {
+                        index = todos.indexOf(e.target.innerHTML);
+                        inputText.value = e.target.innerHTML;
+                    }
+                }
 
-                };
             }
         }
 
         function edit() {
-            span.innerText = inputText.value;
+            items[index].innerText = inputText.value;
             inputText.value = ''
-            
-            refreshArray();
+
+
 
         }
     </script>
