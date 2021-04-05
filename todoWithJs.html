@@ -52,46 +52,14 @@
         <button onclick="edit()">Edit</button>
     </div>
 
-
     <h4>Task:</h4>
     <ul id="list">
-
-        <li>
-
-            <span>Html</span>
-        </li>
-        <li>
-            <span class="checked">CSS</span>
-        </li>
-        <li>
-
-            <span>Javascript</span>
-        </li>
+        <li><span>Html</span></li>
+        <li><span class="checked">CSS</span></li>
+        <li><span>Javascript</span></li>
     </ul>
 
     <script>
-        var liNode = document.getElementsByTagName("LI");
-        var i;
-        for (i = 0; i < liNode.length; i++) {
-            var deleteBtn = document.createElement("SPAN");
-            var txt = document.createTextNode("\u00D7");
-            deleteBtn.className = "close";
-            deleteBtn.appendChild(txt)
-            liNode[i].appendChild(deleteBtn);
-        }
-
-
-        var close = document.getElementsByClassName("close");
-        console.log(close)
-        var i;
-        for (i = 0; i < close.length; i++) {
-            close[i].onclick = function () {
-                var li = this.parentElement;
-                li.style.display = "none";
-                inputText.value = ''
-            }
-        }
-
         var inputText = document.getElementById("txt"),
             items = document.querySelectorAll("#list li"),
             todos = [],
@@ -117,6 +85,16 @@
             }
         }, false)
 
+        var liNode = document.getElementsByTagName("LI");
+        var i;
+        for (i = 0; i < liNode.length; i++) {
+            var spanDelete = document.createElement("SPAN");
+            var txt = document.createTextNode("\u00D7");
+            spanDelete.className = "close";
+            spanDelete.appendChild(txt)
+            liNode[i].appendChild(spanDelete);
+        }
+
         function refreshArray() {
             todos.length = 0;
             items = document.querySelectorAll("#list li");
@@ -128,35 +106,32 @@
 
         function add() {
             if (inputText.value === '') {
-                alert('empty')
+                alert('please write something')
             } else {
                 var listNode = document.getElementById("list"),
                     textNode = document.createTextNode(inputText.value),
                     liNode = document.createElement("LI");
-                span = document.createElement('SPAN')
+                    span = document.createElement('SPAN')
 
-                var deleteBtn = document.createElement("SPAN");
+                var spanDelete = document.createElement("SPAN");
                 var txt = document.createTextNode("\u00D7");
-                deleteBtn.className = "close";
-                deleteBtn.addEventListener('click', deleteItem)
+                spanDelete.className = "close";
 
+                listNode.appendChild(liNode);
+                spanDelete.appendChild(txt);
+                liNode.appendChild(span)
+                span.appendChild(textNode)
+                liNode.appendChild(spanDelete)
 
+                var close = document.getElementsByClassName("close");
                 for (i = 0; i < close.length; i++) {
                     close[i].onclick = function () {
-                        var div = this.parentElement;
-                        div.style.display = "none";
+                        var li = this.parentElement;
+                        li.style.display = "none";
                     }
                 }
 
-
-                listNode.appendChild(liNode);
-                deleteBtn.appendChild(txt);
-                liNode.appendChild(span)
-                span.appendChild(textNode)
-                liNode.appendChild(deleteBtn)
-
                 inputText.value = ''
-
                 refreshArray();
                 liNode.onclick = function () {
                     index = todos.indexOf(liNode.innerText);
@@ -172,15 +147,6 @@
             refreshArray();
 
         }
-
-        // function deleteItem() {
-        //     refreshArray();
-        //     if (items.length > 0) {
-        //         items[index].parentNode.removeChild(items[index]);
-        //         inputText.value = "";
-        //     }
-
-        // }
     </script>
 
 </body>
