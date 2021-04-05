@@ -54,9 +54,6 @@
 
     <h4>Task:</h4>
     <ul id="list">
-        <li><span>Html</span></li>
-        <li><span class="checked">CSS</span></li>
-        <li><span>Javascript</span></li>
     </ul>
 
     <script>
@@ -136,14 +133,16 @@
                 liNode.onclick = function () {
                     index = todos.indexOf(liNode.innerText);
                     inputText.value = liNode.innerText;
+                    
 
                 };
             }
         }
 
         function edit() {
-            items[index].innerText = inputText.value;
+            span.innerText = inputText.value;
             inputText.value = ''
+            
             refreshArray();
 
         }
