@@ -70,7 +70,7 @@
     </ul>
 
     <script>
-        var liNode = document.getElementsByTagName("LI");   
+        var liNode = document.getElementsByTagName("LI");
         var i;
         for (i = 0; i < liNode.length; i++) {
             var deleteBtn = document.createElement("SPAN");
@@ -79,9 +79,10 @@
             deleteBtn.appendChild(txt)
             liNode[i].appendChild(deleteBtn);
         }
-          
+
 
         var close = document.getElementsByClassName("close");
+        console.log(close)
         var i;
         for (i = 0; i < close.length; i++) {
             close[i].onclick = function () {
@@ -93,7 +94,8 @@
 
         var inputText = document.getElementById("txt"),
             items = document.querySelectorAll("#list li"),
-            todos = [],index;
+            todos = [],
+            index;
 
         for (var i = 0; i < items.length; i++) {
             todos.push();
@@ -103,7 +105,7 @@
             items[i].onclick = function () {
                 index = todos.indexOf(this.innerText);
                 inputText.value = this.innerText;
-        
+
             };
 
         }
@@ -131,11 +133,12 @@
                 var listNode = document.getElementById("list"),
                     textNode = document.createTextNode(inputText.value),
                     liNode = document.createElement("LI");
+                span = document.createElement('SPAN')
 
                 var deleteBtn = document.createElement("SPAN");
                 var txt = document.createTextNode("\u00D7");
                 deleteBtn.className = "close";
-                deleteBtn.addEventListener('click',deleteItem)
+                deleteBtn.addEventListener('click', deleteItem)
 
 
                 for (i = 0; i < close.length; i++) {
@@ -145,10 +148,14 @@
                     }
                 }
 
-                liNode.appendChild(textNode);
+
                 listNode.appendChild(liNode);
                 deleteBtn.appendChild(txt);
+                liNode.appendChild(span)
+                span.appendChild(textNode)
                 liNode.appendChild(deleteBtn)
+
+                inputText.value = ''
 
                 refreshArray();
                 liNode.onclick = function () {
@@ -163,17 +170,17 @@
             items[index].innerText = inputText.value;
             inputText.value = ''
             refreshArray();
-              
+
         }
 
-        function deleteItem() {
-            refreshArray();
-            if (items.length > 0) {
-                items[index].parentNode.removeChild(items[index]);
-                inputText.value = "";
-            }
-           
-        }
+        // function deleteItem() {
+        //     refreshArray();
+        //     if (items.length > 0) {
+        //         items[index].parentNode.removeChild(items[index]);
+        //         inputText.value = "";
+        //     }
+
+        // }
     </script>
 
 </body>
