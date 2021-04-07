@@ -9,16 +9,19 @@
 </head>
 
 <body>
-    <div id="myDiv" class="header">
+    <section id="myDiv" class="header">
         <h2>Todo List</h2>
-        <input type="text" placeholder="write something..." id="txt">
-        <button onclick="add()">Add</button>
-        <button onclick="edit()">Edit</button>
-    </div>
+        <form onclick="return false">
+            <input type="text" placeholder="write something..." id="txt">
+            <button onclick="add()">Add</button>
+            <button onclick="edit()">Edit</button>
+        </form>
+    </section>
 
-    <h3>Task:</h3>
-    <ul id="list">
-    </ul>
+    <section>
+        <h3>Task:</h3>
+        <ul id="list"></ul>
+    </section>
 
     <script src="script.js"></script>
 

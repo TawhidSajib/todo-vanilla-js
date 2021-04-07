@@ -10,7 +10,7 @@ for (var i = 0; i < items.length; i++) {
 for (var i = 0; i < items.length; i++) {
     items[i].onclick = function () {
         index = todos.indexOf(this.innerText);
-        nputText.value = this.innerText;
+        inputText.value = this.innerText;
     };
 
 }
@@ -34,16 +34,17 @@ for (i = 0; i < liNode.length; i++) {
 
 function refreshArray() {
     todos.length = 0;
-    items = document.querySelectorAll("#list span");
+    items = document.querySelectorAll("#list .task");
     for (var i = 0; i < items.length; i++) {
         todos.push(items[i].innerText);
     }
 }
 
-function add() {
+function add(e) {
     if (inputText.value === '') {
         alert('please write something')
     } else {
+        console.log(inputText.value)
         var listNode = document.getElementById("list"),
             textNode = document.createTextNode(inputText.value),
             liNode = document.createElement("LI");
@@ -83,8 +84,6 @@ function add() {
 
 function edit() {
     items[index].innerText = inputText.value;
+    todos[index] = inputText.value;
     inputText.value = ''
-
-
-
 }
