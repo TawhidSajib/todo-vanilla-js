@@ -40,7 +40,7 @@ function refreshArray() {
     }
 }
 
-function add(e) {
+function add() {
     if (inputText.value === '') {
         alert('please write something')
     } else {
@@ -51,15 +51,23 @@ function add(e) {
         span = document.createElement('SPAN')
         span.className = "task"
 
+        var edit = document.createElement('button')
+        edit.textContent = "Edit"
+        edit.className = "editBtn"
+
         var spanDelete = document.createElement("span");
         var txt = document.createTextNode("\u00D7");
         spanDelete.className = "close";
+
 
         listNode.appendChild(liNode);
         spanDelete.appendChild(txt);
         liNode.appendChild(span)
         span.appendChild(textNode)
+
+        liNode.appendChild(edit)
         liNode.appendChild(spanDelete)
+
 
         var close = document.getElementsByClassName("close");
         for (i = 0; i < close.length; i++) {
@@ -71,11 +79,24 @@ function add(e) {
 
         inputText.value = ''
         refreshArray();
-        var task = document.querySelectorAll('.task');
+        var task = document.querySelectorAll('.editBtn');
         for (var i = 0; i < task.length; i++) {
-            task[i].onclick = function (e) {
-                index = todos.indexOf(e.target.innerHTML);
-                inputText.value = e.target.innerHTML;
+            task[i].onclick = function () {
+                console.log(this.parentElement);
+
+                let remove = document.querySelector("#list .active");
+                if (remove) {
+                    remove.classList.remove('active');
+                }
+
+                setTimeout(() => {
+                    let child = this.parentElement.querySelector("#list .task");
+                    let active = this.parentElement.querySelector("#list .editBtn");
+                    active.classList = "active editBtn"
+                    index = todos.indexOf(child.innerHTML);
+                    inputText.value = child.innerHTML;
+                }, 500)
+
             }
         }
 
