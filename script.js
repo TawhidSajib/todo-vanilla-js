@@ -68,7 +68,6 @@ function add() {
         liNode.appendChild(edit)
         liNode.appendChild(spanDelete)
 
-
         var close = document.getElementsByClassName("close");
         for (i = 0; i < close.length; i++) {
             close[i].onclick = function () {
@@ -82,8 +81,6 @@ function add() {
         var task = document.querySelectorAll('.editBtn');
         for (var i = 0; i < task.length; i++) {
             task[i].onclick = function () {
-                console.log(this.parentElement);
-
                 let remove = document.querySelector("#list .active");
                 if (remove) {
                     remove.classList.remove('active');
@@ -95,7 +92,7 @@ function add() {
                     active.classList = "active editBtn"
                     index = todos.indexOf(child.innerHTML);
                     inputText.value = child.innerHTML;
-                }, 500)
+                }, 200)
 
             }
         }
