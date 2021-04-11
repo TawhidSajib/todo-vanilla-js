@@ -65,7 +65,7 @@
         margin: 0 auto;
         border: none;
         border-radius: 0;
-        width: 30%;
+        max-width: 660px;
         padding: 10px;
         font-size: 16px;
     }
