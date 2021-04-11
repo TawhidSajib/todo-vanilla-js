@@ -7,7 +7,7 @@ for (var i = 0; i < items.length; i++) {
     todos.push();
 }
 
-for (var i = 0; i < items.length; i++) {
+for (let i = 0; i < items.length; i++) {
     items[i].onclick = function () {
         index = todos.indexOf(this.innerText);
         inputText.value = this.innerText;
@@ -23,8 +23,8 @@ list.addEventListener('click', function (ev) {
 }, false)
 
 var liNode = document.getElementsByTagName("LI");
-var i;
-for (i = 0; i < liNode.length; i++) {
+
+for (let i = 0; i < liNode.length; i++) {
     var spanDelete = document.createElement("SPAN");
     var txt = document.createTextNode("\u00D7");
     spanDelete.className = "close";
@@ -48,7 +48,7 @@ function add() {
         var listNode = document.getElementById("list"),
             textNode = document.createTextNode(inputText.value),
             liNode = document.createElement("LI");
-        span = document.createElement('SPAN')
+        let span = document.createElement('SPAN')
         span.className = "task"
 
         var edit = document.createElement('button')
@@ -69,7 +69,7 @@ function add() {
         liNode.appendChild(spanDelete)
 
         var close = document.getElementsByClassName("close");
-        for (i = 0; i < close.length; i++) {
+        for (let i = 0; i < close.length; i++) {
             close[i].onclick = function () {
                 var li = this.parentElement;
                 li.style.display = "none";
