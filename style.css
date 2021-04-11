@@ -81,7 +81,8 @@
     }
 
     button:hover {
-        background-color: #bbb;
+        background-color: rgb(126, 118, 118);
+        color: white;
     }
 
     .task {

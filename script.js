@@ -82,25 +82,28 @@ function add() {
         for (var i = 0; i < task.length; i++) {
             task[i].onclick = function () {
                 let remove = document.querySelector("#list .active");
-                if (remove) {
-                    remove.classList.remove('active');
-                }
+                const promise = new Promise((resolve) => {
+                    if (remove) {
+                        remove.classList.remove('active')
+                    }
+                    resolve()
+                })
 
-                setTimeout(() => {
-                    let child = this.parentElement.querySelector("#list .task");
-                    let active = this.parentElement.querySelector("#list .editBtn");
-                    active.classList = "active editBtn"
-                    index = todos.indexOf(child.innerHTML);
-                    inputText.value = child.innerHTML;
-                }, 200)
-
+                promise
+                    .then(() => {
+                        let child = this.parentElement.querySelector("#list .task");
+                        let active = this.parentElement.querySelector("#list .editBtn");
+                        active.classList = "active editBtn"
+                        index = todos.indexOf(child.innerHTML);
+                        inputText.value = child.innerHTML;
+                    })
             }
         }
 
     }
 }
 
-function edit() {
+function update() {
     items[index].innerText = inputText.value;
     todos[index] = inputText.value;
     inputText.value = ''
