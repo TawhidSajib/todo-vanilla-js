@@ -1,3 +1,5 @@
+window.add = add;
+window.update = update;
 var inputText = document.getElementById("txt"),
     items = document.querySelectorAll("#list li"),
     todos = [],
